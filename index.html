@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gyan Bakery • Fresh Cakes & Breads</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <!-- WhatsApp Float Icon CSS -->
+  <style>
+    .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span>Gyan Bakery</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="custom-cake.html">Custom Cake</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html" class="btn outline">Cart <span id="cartBadge" class="badge">0</span></a>
+        <span id="authLinks"><a href="login.html" class="btn primary">Login</a></span>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        document.getElementById("authLinks").innerHTML = `
+          <a href="customer.html" class="btn outline sm">Dashboard</a>
+          <a href="profile.html" class="btn primary sm">Hi, ${user.name.split(' ')[0]}</a>
+        `;
+      }
+    });
+  </script>
+
+  <section class="hero" id="heroSlider">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Freshly Baked Happiness</h1>
+      <p>Artisanal breads, premium cakes, and mouth-watering pastries baked fresh every day. Order now for doorstep delivery.</p>
+      <div class="flex justify-center gap-2">
+        <a href="products.html" class="btn primary">Order Now</a>
+        <a href="custom-cake.html" class="btn outline">Customize Cake</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const images = [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1585478564381-e0df37348039?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1499636138143-bd649043ea52?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1563729768-6af784d6df1a?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1567171466295-4afa63d45416?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=1600&q=80"
+    ];
+    let currentIdx = 0;
+    const hero = document.getElementById("heroSlider");
+    
+    function nextImage() {
+      currentIdx = (currentIdx + 1) % images.length;
+      hero.style.backgroundImage = `url('${images[currentIdx]}')`;
+    }
+    
+    // Preload
+    images.forEach(src => { const img = new Image(); img.src = src; });
+    
+    hero.style.backgroundImage = `url('${images[0]}')`;
+    setInterval(nextImage, 5000);
+  </script>
+
+  <section class="container mt-4">
+    <h2 class="text-center">Featured Delights</h2>
+    <div id="featuredGrid" class="grid-4 mt-4">
+      <!-- Populated by JS -->
+    </div>
+    <div class="text-center mt-4">
+      <a href="products.html" class="btn outline">View All Products</a>
+    </div>
+  </section>
+
+  <section class="container mt-4" style="background:#fff0f5; padding: 2rem; border-radius: 12px;">
+    <div class="grid-2 items-center">
+      <div>
+        <h2>Custom Cakes for Every Occasion</h2>
+        <p>Birthdays, Weddings, or Anniversaries - make them special with our personalized cakes. Choose your flavor, size, and design.</p>
+        <a href="custom-cake.html" class="btn primary">Start Designing</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=800&q=80" alt="Custom Cake" style="border-radius:12px; width:100%; height:300px; object-fit:cover;">
+    </div>
+  </section>
+
+  <section class="container mt-4">
+    <h2 class="text-center">Our Gallery</h2>
+    <div class="grid-4 mt-4">
+      <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=800&q=80" style="border-radius:8px; height:200px; width:100%; object-fit:cover;" alt="Baking">
+      <img src="https://images.unsplash.com/photo-1551024601-bec0273e132e?auto=format&fit=crop&w=800&q=80" style="border-radius:8px; height:200px; width:100%; object-fit:cover;" alt="Donuts">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" style="border-radius:8px; height:200px; width:100%; object-fit:cover;" alt="Breads">
+      <img src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=800&q=80" style="border-radius:8px; height:200px; width:100%; object-fit:cover;" alt="Cake">
+    </div>
+  </section>
+
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Gyan Bakery</h3>
+        <p>Baking memories since 2010. 100% Eggless options available.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">Track Order</a></p>
+        <p><a href="profile.html">My Account</a></p>
+        <p><a href="admin.html">Admin Panel</a></p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" style="width:35px; height:35px;">
+  </a>
+
+  <script src="assets/customer.js"></script>
+</body>
+</html>
