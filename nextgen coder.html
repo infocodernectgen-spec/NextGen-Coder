@@ -1,0 +1,1310 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NextGen Coder - Transforming Ideas into Digital Reality</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    * {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid rgba(6, 182, 212, 0.2);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 50px rgba(6, 182, 212, 0.3);
+      border-color: #06b6d4;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.5); }
+      50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.8); }
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .glow-animation {
+      animation: glow 3s ease-in-out infinite;
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-slide-in-left {
+      animation: slideInLeft 0.8s ease-out forwards;
+    }
+    
+    .animate-slide-in-right {
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(6, 182, 212, 0.6);
+    }
+    
+    .code-block {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .code-block::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(6, 182, 212, 0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .contact-item {
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px solid rgba(6, 182, 212, 0.2);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-item:hover {
+      border-color: #06b6d4;
+      transform: scale(1.05);
+    }
+    
+    input, textarea {
+      background: rgba(15, 23, 42, 0.6);
+      border: 2px solid rgba(6, 182, 212, 0.2);
+      color: #e2e8f0;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #06b6d4;
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    }
+    
+    input::placeholder, textarea::placeholder {
+      color: #64748b;
+    }
+    
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 36px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full gradient-bg">
+  <div class="w-full h-full overflow-auto"><!-- Navigation -->
+   <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg" style="background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid rgba(6, 182, 212, 0.2);">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+       <div class="w-10 h-10 rounded-lg glow-animation flex items-center justify-center" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);"><span class="text-white text-xl font-bold mono">&lt;/&gt;</span>
+       </div><span id="nav-company-name" class="text-white text-2xl font-bold">NextGen Coder</span>
+      </div>
+      <div class="hidden md:flex items-center space-x-8"><a href="#home" class="nav-link active text-white font-semibold">Home</a> <a href="#about" class="nav-link text-gray-300 font-semibold hover:text-white">About</a> <a href="#services" class="nav-link text-gray-300 font-semibold hover:text-white">Services</a> <a href="#contact" class="nav-link text-gray-300 font-semibold hover:text-white">Contact</a> <button onclick="showLoginModal()" class="btn-primary px-6 py-2 rounded-full text-white font-semibold text-sm"> Login </button>
+      </div><button id="mobile-menu-btn" class="md:hidden text-white">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div><!-- Mobile Menu -->
+     <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2"><a href="#home" class="block text-white font-semibold py-2">Home</a> <a href="#about" class="block text-gray-300 font-semibold py-2 hover:text-white">About</a> <a href="#services" class="block text-gray-300 font-semibold py-2 hover:text-white">Services</a> <a href="#contact" class="block text-gray-300 font-semibold py-2 hover:text-white">Contact</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section id="home" class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-7xl mx-auto w-full">
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-slide-in-left">
+       <h1 id="hero-company-name" class="text-6xl md:text-7xl font-bold text-white mb-6">NextGen<br><span class="gradient-text">Coder</span></h1>
+       <p id="hero-tagline" class="text-2xl text-gray-300 mb-8 font-medium">Transforming Ideas into Digital Reality</p>
+       <p class="text-lg text-gray-400 mb-10 leading-relaxed">We craft cutting-edge web solutions, mobile apps, and custom software that drive your business forward in the digital age.</p>
+       <div class="flex flex-wrap gap-4"><a href="#contact" class="btn-primary px-8 py-4 rounded-full text-white font-bold text-lg"> Get Started </a> <a href="#services" class="px-8 py-4 rounded-full text-white font-bold text-lg border-2 border-cyan-500 hover:bg-cyan-500 transition-all"> Our Services </a>
+       </div>
+      </div>
+      <div class="animate-slide-in-right">
+       <div class="code-block float-animation">
+        <div class="flex items-center space-x-2 mb-4">
+         <div class="w-3 h-3 rounded-full" style="background: #ef4444;"></div>
+         <div class="w-3 h-3 rounded-full" style="background: #f59e0b;"></div>
+         <div class="w-3 h-3 rounded-full" style="background: #10b981;"></div>
+        </div>
+        <pre class="mono text-sm text-cyan-400"><code><span style="color: #8b5cf6;">const</span> <span style="color: #06b6d4;">nextGenCoder</span> = {
+  <span style="color: #f59e0b;">expertise</span>: [
+    <span style="color: #10b981;">'Web Development'</span>,
+    <span style="color: #10b981;">'Mobile Apps'</span>,
+    <span style="color: #10b981;">'UI/UX Design'</span>,
+    <span style="color: #10b981;">'Cloud Solutions'</span>
+  ],
+  <span style="color: #f59e0b;">mission</span>: <span style="color: #10b981;">'Excellence'</span>,
+  <span style="color: #f59e0b;">innovation</span>: <span style="color: #8b5cf6;">true</span>
+};</code></pre>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section id="about" class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-7xl mx-auto w-full">
+     <div class="text-center mb-16 animate-fade-in-up">
+      <h2 id="about-heading" class="section-title gradient-text">About NextGen Coder</h2>
+      <div class="w-24 h-1 mx-auto" style="background: linear-gradient(90deg, #06b6d4, #3b82f6);"></div>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-slide-in-left">
+       <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+        <p id="about-text">NextGen Coder is a forward-thinking software development company dedicated to turning innovative ideas into powerful digital solutions. With expertise spanning web development, mobile applications, and custom software engineering, we empower businesses to thrive in the digital landscape.</p>
+        <p>Our team of passionate developers, designers, and strategists work collaboratively to deliver solutions that are not only technically robust but also aesthetically pleasing and user-friendly. We believe in the power of technology to transform businesses and create meaningful experiences.</p>
+        <p>From startups to established enterprises, we partner with clients across industries to build scalable, secure, and high-performance applications that drive growth and innovation.</p>
+       </div>
+       <div class="grid grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+         <div class="text-5xl font-bold gradient-text mb-2">
+          50+
+         </div>
+         <div class="text-gray-400 font-semibold">
+          Projects
+         </div>
+        </div>
+        <div class="text-center">
+         <div class="text-5xl font-bold gradient-text mb-2">
+          40+
+         </div>
+         <div class="text-gray-400 font-semibold">
+          Clients
+         </div>
+        </div>
+        <div class="text-center">
+         <div class="text-5xl font-bold gradient-text mb-2">
+          5+
+         </div>
+         <div class="text-gray-400 font-semibold">
+          Years
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="animate-slide-in-right">
+       <div class="grid grid-cols-2 gap-6">
+        <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-5xl mb-4">
+          🚀
+         </div>
+         <h4 class="text-xl font-bold text-white mb-2">Innovation</h4>
+         <p class="text-gray-400">Cutting-edge solutions for modern challenges</p>
+        </div>
+        <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-5xl mb-4">
+          ⚡
+         </div>
+         <h4 class="text-xl font-bold text-white mb-2">Performance</h4>
+         <p class="text-gray-400">Lightning-fast and optimized applications</p>
+        </div>
+        <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-5xl mb-4">
+          🎨
+         </div>
+         <h4 class="text-xl font-bold text-white mb-2">Design</h4>
+         <p class="text-gray-400">Beautiful interfaces that users love</p>
+        </div>
+        <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-5xl mb-4">
+          🔒
+         </div>
+         <h4 class="text-xl font-bold text-white mb-2">Security</h4>
+         <p class="text-gray-400">Enterprise-grade protection for your data</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section id="services" class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-7xl mx-auto w-full">
+     <div class="text-center mb-16 animate-fade-in-up">
+      <h2 id="services-heading" class="section-title gradient-text">Our Services</h2>
+      <div class="w-24 h-1 mx-auto" style="background: linear-gradient(90deg, #06b6d4, #3b82f6);"></div>
+      <p class="text-gray-300 text-xl mt-6">Comprehensive solutions tailored to your needs</p>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+        💻
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">Web Development</h3>
+       <p class="text-gray-400 leading-relaxed">Custom websites and web applications built with modern frameworks like React, Vue, and Next.js. Responsive, fast, and SEO-optimized.</p>
+      </div>
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+        📱
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">Mobile Apps</h3>
+       <p class="text-gray-400 leading-relaxed">Native and cross-platform mobile applications for iOS and Android. Built with React Native, Flutter, and Swift for seamless experiences.</p>
+      </div>
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+        🎨
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">UI/UX Design</h3>
+       <p class="text-gray-400 leading-relaxed">User-centered design that combines aesthetics with functionality. From wireframes to high-fidelity prototypes and design systems.</p>
+      </div>
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+        ☁️
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">Cloud Solutions</h3>
+       <p class="text-gray-400 leading-relaxed">Scalable cloud infrastructure on AWS, Azure, and Google Cloud. DevOps, CI/CD pipelines, and cloud migration services.</p>
+      </div>
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+        🛠️
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">Custom Software</h3>
+       <p class="text-gray-400 leading-relaxed">Bespoke software solutions tailored to your unique business requirements. Enterprise applications, APIs, and system integrations.</p>
+      </div>
+      <div class="card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+       <div class="service-icon" style="background: linear-gradient(135deg, #ec4899, #f59e0b);">
+        📊
+       </div>
+       <h3 class="text-2xl font-bold text-white mb-4">Consulting</h3>
+       <p class="text-gray-400 leading-relaxed">Strategic technology consulting to help you make informed decisions. Architecture planning, code reviews, and technical audits.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section id="contact" class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-7xl mx-auto w-full">
+     <div class="text-center mb-16 animate-fade-in-up">
+      <h2 id="contact-heading" class="section-title gradient-text">Get In Touch</h2>
+      <div class="w-24 h-1 mx-auto" style="background: linear-gradient(90deg, #06b6d4, #3b82f6);"></div>
+      <p class="text-gray-300 text-xl mt-6">Let's build something amazing together</p>
+     </div>
+     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12"><!-- Contact Form -->
+      <div class="animate-slide-in-left">
+       <form id="contact-form" class="space-y-6">
+        <div><label for="name" class="block text-white font-semibold mb-2 text-lg">Your Name</label> <input type="text" id="name" class="w-full px-6 py-4 rounded-xl" placeholder="John Doe" required>
+        </div>
+        <div><label for="email" class="block text-white font-semibold mb-2 text-lg">Email Address</label> <input type="email" id="email" class="w-full px-6 py-4 rounded-xl" placeholder="john@example.com" required>
+        </div>
+        <div><label for="subject" class="block text-white font-semibold mb-2 text-lg">Subject</label> <input type="text" id="subject" class="w-full px-6 py-4 rounded-xl" placeholder="Project Inquiry" required>
+        </div>
+        <div><label for="message" class="block text-white font-semibold mb-2 text-lg">Message</label> <textarea id="message" rows="5" class="w-full px-6 py-4 rounded-xl" placeholder="Tell us about your project..." required></textarea>
+        </div><button type="submit" class="btn-primary w-full py-4 rounded-xl text-white font-bold text-lg"> Send Message </button>
+       </form>
+       <div id="form-message" class="hidden mt-4 p-4 rounded-xl text-center font-semibold"></div>
+      </div><!-- Contact Info -->
+      <div class="animate-slide-in-right space-y-6">
+       <div class="contact-item">
+        <div class="flex items-start space-x-4">
+         <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);">
+          📞
+         </div>
+         <div>
+          <h4 class="text-xl font-bold text-white mb-2">Phone</h4><a id="contact-phone" href="tel:9762317835" class="text-cyan-400 text-lg hover:text-cyan-300 transition-colors">9762317835</a>
+         </div>
+        </div>
+       </div>
+       <div class="contact-item">
+        <div class="flex items-start space-x-4">
+         <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+          ✉️
+         </div>
+         <div>
+          <h4 class="text-xl font-bold text-white mb-2">Email</h4><a id="contact-email" href="mailto:info.codernextgencoder@gmail.com" class="text-cyan-400 text-lg hover:text-cyan-300 transition-colors break-all">info.codernextgencoder@gmail.com</a>
+         </div>
+        </div>
+       </div>
+       <div class="contact-item">
+        <div class="flex items-start space-x-4">
+         <div class="w-16 h-16 rounded-xl flex items-center justify-center text-3xl" style="background: linear-gradient(135deg, #10b981, #06b6d4);">
+          🕐
+         </div>
+         <div>
+          <h4 class="text-xl font-bold text-white mb-2">Business Hours</h4>
+          <p class="text-gray-300 text-lg">Monday - Saturday</p>
+          <p class="text-gray-300 text-lg">9:00 AM - 6:00 PM</p>
+         </div>
+        </div>
+       </div>
+       <div class="contact-item">
+        <h4 class="text-xl font-bold text-white mb-4">Follow Us</h4>
+        <div class="flex space-x-4"><a href="#" class="w-12 h-12 rounded-xl flex items-center justify-center text-xl hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #06b6d4, #3b82f6);"> 📘 </a> <a href="#" class="w-12 h-12 rounded-xl flex items-center justify-center text-xl hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);"> 📷 </a> <a href="#" class="w-12 h-12 rounded-xl flex items-center justify-center text-xl hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #10b981, #06b6d4);"> 🐦 </a> <a href="#" class="w-12 h-12 rounded-xl flex items-center justify-center text-xl hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #f59e0b, #ef4444);"> 💼 </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer class="py-8 px-6 border-t" style="background: rgba(15, 23, 42, 0.8); border-color: rgba(6, 182, 212, 0.2);">
+    <div class="max-w-7xl mx-auto text-center">
+     <p class="text-gray-400">© 2024 <span id="footer-company-name" class="gradient-text font-bold">NextGen Coder</span>. All rights reserved.</p>
+     <p class="text-gray-500 mt-2">Crafted with ❤️ and cutting-edge technology</p>
+    </div>
+   </footer><!-- Login Modal -->
+   <div id="login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6" style="background: rgba(0, 0, 0, 0.8);">
+    <div class="max-w-md w-full rounded-2xl p-8" style="background: rgba(15, 23, 42, 0.95); border: 2px solid rgba(6, 182, 212, 0.3);">
+     <div class="flex justify-between items-center mb-6">
+      <h3 class="text-2xl font-bold text-white">Login</h3><button onclick="hideLoginModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+     </div>
+     <div class="flex gap-3 mb-6"><button id="login-admin-btn" class="flex-1 py-3 px-4 rounded-xl font-semibold transition-all" style="background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white;"> Admin </button> <button id="login-student-btn" class="flex-1 py-3 px-4 rounded-xl font-semibold transition-all" style="background: rgba(15, 23, 42, 0.6); color: white; border: 2px solid rgba(6, 182, 212, 0.3);"> Student </button>
+     </div>
+     <form id="login-form" class="space-y-4">
+      <div><label class="block text-white font-semibold mb-2">Username</label> <input type="text" id="login-username" class="w-full px-4 py-3 rounded-xl" placeholder="Enter username" required>
+      </div>
+      <div><label class="block text-white font-semibold mb-2">Password</label> <input type="password" id="login-password" class="w-full px-4 py-3 rounded-xl" placeholder="Enter password" required>
+      </div><button type="submit" id="login-submit-btn" class="btn-primary w-full py-3 rounded-xl text-white font-bold"> Sign In </button>
+     </form>
+     <p class="text-gray-400 text-sm text-center mt-4">Demo: admin/admin123 or student/student123</p>
+    </div>
+   </div><!-- Admin Dashboard -->
+   <div id="admin-dashboard" class="hidden fixed inset-0 z-50" style="background: rgba(15, 23, 42, 0.98);">
+    <div class="flex h-full"><!-- Admin Sidebar -->
+     <aside class="w-72 p-6 border-r" style="background: rgba(0, 0, 0, 0.3); border-color: rgba(6, 182, 212, 0.2);">
+      <div class="mb-8">
+       <h2 class="text-white font-bold text-xl mb-2">Admin Panel</h2>
+       <p class="text-gray-400 text-sm">NextGen Coder</p>
+      </div>
+      <nav class="space-y-2">
+       <div class="sidebar-item active px-4 py-3 rounded-xl font-semibold cursor-pointer" onclick="switchAdminView('students')"><span>👥 Students</span>
+       </div>
+       <div class="sidebar-item px-4 py-3 rounded-xl font-semibold text-white cursor-pointer" onclick="switchAdminView('projects')"><span>📂 Projects</span>
+       </div>
+       <div class="sidebar-item px-4 py-3 rounded-xl font-semibold text-white cursor-pointer" onclick="switchAdminView('versions')"><span>🚀 Version Control</span>
+       </div>
+       <div class="sidebar-item px-4 py-3 rounded-xl font-semibold text-white cursor-pointer" onclick="switchAdminView('users')"><span>🔐 User Management</span>
+       </div>
+      </nav>
+      <div class="mt-auto pt-6"><button onclick="logout()" class="w-full px-4 py-3 rounded-xl font-semibold text-white" style="background: rgba(239, 68, 68, 0.3);"> 🚪 Logout </button>
+      </div>
+     </aside><!-- Admin Content -->
+     <main class="flex-1 p-8 overflow-auto"><!-- Students View -->
+      <div id="admin-view-students">
+       <h1 class="text-4xl font-bold text-white mb-8">Student Management</h1>
+       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <h2 class="text-xl font-bold text-white mb-6">Add Student</h2>
+         <form id="admin-student-form" class="space-y-4">
+          <div><label class="block text-white font-semibold mb-2 text-sm">Full Name</label> <input type="text" id="as-name" class="w-full px-4 py-3 rounded-xl" required>
+          </div>
+          <div><label class="block text-white font-semibold mb-2 text-sm">Email</label> <input type="email" id="as-email" class="w-full px-4 py-3 rounded-xl" required>
+          </div>
+          <div><label class="block text-white font-semibold mb-2 text-sm">Phone</label> <input type="tel" id="as-phone" class="w-full px-4 py-3 rounded-xl" required>
+          </div>
+          <div><label class="block text-white font-semibold mb-2 text-sm">Course</label> <input type="text" id="as-course" class="w-full px-4 py-3 rounded-xl" required>
+          </div><button type="submit" id="admin-student-submit" class="btn-primary w-full py-3 text-white font-bold rounded-xl"> Add Student </button>
+         </form>
+        </div>
+        <div class="lg:col-span-2 card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <h2 class="text-xl font-bold text-white mb-4">Student List</h2>
+         <div class="overflow-x-auto">
+          <table class="w-full">
+           <thead>
+            <tr class="border-b-2" style="border-color: rgba(6, 182, 212, 0.2);">
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Name</th>
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Email</th>
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Course</th>
+             <th class="px-4 py-3 text-center text-sm font-bold text-white">Actions</th>
+            </tr>
+           </thead>
+           <tbody id="admin-students-table">
+            <tr>
+             <td colspan="4" class="px-4 py-8 text-center text-gray-400">No students found</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div><!-- Projects View -->
+      <div id="admin-view-projects" class="hidden">
+       <h1 class="text-4xl font-bold text-white mb-8">Project Management</h1>
+       <div class="card-hover p-6 rounded-2xl mb-6" style="background: rgba(15, 23, 42, 0.6);">
+        <h2 class="text-xl font-bold text-white mb-4">All Projects</h2>
+        <div id="admin-projects-list" class="space-y-4">
+         <p class="text-gray-400 text-center py-8">No projects found</p>
+        </div>
+       </div>
+      </div><!-- Versions View -->
+      <div id="admin-view-versions" class="hidden">
+       <h1 class="text-4xl font-bold text-white mb-8">Version Control</h1>
+       <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+        <div class="flex justify-between items-center mb-6">
+         <h2 class="text-xl font-bold text-white">Website Versions</h2><button onclick="publishVersion()" id="publish-btn" class="btn-primary px-6 py-3 rounded-xl text-white font-bold"> Publish to Production </button>
+        </div>
+        <div id="versions-list" class="space-y-4">
+         <div class="p-6 rounded-xl border-2" style="background: rgba(6, 182, 212, 0.1); border-color: #06b6d4;">
+          <div class="flex justify-between items-center">
+           <div>
+            <h3 class="text-xl font-bold text-white mb-2">Version 1.0</h3>
+            <p class="text-gray-300">Initial Release - Production</p>
+            <p class="text-sm text-cyan-400 mt-2">Status: LIVE 🟢</p>
+           </div><span class="px-4 py-2 rounded-lg font-bold" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: white;"> PRODUCTION </span>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Users View -->
+      <div id="admin-view-users" class="hidden">
+       <h1 class="text-4xl font-bold text-white mb-8">User Management</h1>
+       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <h2 class="text-xl font-bold text-white mb-6">Create User</h2>
+         <form id="admin-user-form" class="space-y-4">
+          <div><label class="block text-white font-semibold mb-2 text-sm">Username</label> <input type="text" id="au-username" class="w-full px-4 py-3 rounded-xl" required>
+          </div>
+          <div><label class="block text-white font-semibold mb-2 text-sm">Password</label> <input type="password" id="au-password" class="w-full px-4 py-3 rounded-xl" required>
+          </div>
+          <div><label class="block text-white font-semibold mb-2 text-sm">Role</label> <select id="au-role" class="w-full px-4 py-3 rounded-xl" required> <option value="">Select Role</option> <option value="admin">Admin</option> <option value="student">Student</option> </select>
+          </div>
+          <div id="au-student-select-wrapper" class="hidden"><label class="block text-white font-semibold mb-2 text-sm">Link to Student</label> <select id="au-student" class="w-full px-4 py-3 rounded-xl"> <option value="">Select Student</option> </select>
+          </div><button type="submit" id="admin-user-submit" class="btn-primary w-full py-3 text-white font-bold rounded-xl"> Create User </button>
+         </form>
+        </div>
+        <div class="lg:col-span-2 card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <h2 class="text-xl font-bold text-white mb-4">User List</h2>
+         <div class="overflow-x-auto">
+          <table class="w-full">
+           <thead>
+            <tr class="border-b-2" style="border-color: rgba(6, 182, 212, 0.2);">
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Username</th>
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Role</th>
+             <th class="px-4 py-3 text-left text-sm font-bold text-white">Status</th>
+             <th class="px-4 py-3 text-center text-sm font-bold text-white">Actions</th>
+            </tr>
+           </thead>
+           <tbody id="admin-users-table">
+            <tr>
+             <td colspan="4" class="px-4 py-8 text-center text-gray-400">No users found</td>
+            </tr>
+           </tbody>
+          </table>
+         </div>
+        </div>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div><!-- Student Dashboard -->
+   <div id="student-dashboard" class="hidden fixed inset-0 z-50" style="background: rgba(15, 23, 42, 0.98);">
+    <div class="flex h-full"><!-- Student Sidebar -->
+     <aside class="w-72 p-6 border-r" style="background: rgba(0, 0, 0, 0.3); border-color: rgba(6, 182, 212, 0.2);">
+      <div class="mb-8">
+       <h2 id="student-name-display" class="text-white font-bold text-xl mb-2">Student Portal</h2>
+       <p class="text-gray-400 text-sm">NextGen Coder</p>
+      </div>
+      <nav class="space-y-2">
+       <div class="sidebar-item active px-4 py-3 rounded-xl font-semibold cursor-pointer" onclick="switchStudentView('overview')"><span>📊 Overview</span>
+       </div>
+       <div class="sidebar-item px-4 py-3 rounded-xl font-semibold text-white cursor-pointer" onclick="switchStudentView('projects')"><span>📂 My Projects</span>
+       </div>
+       <div class="sidebar-item px-4 py-3 rounded-xl font-semibold text-white cursor-pointer" onclick="switchStudentView('submit')"><span>📤 Submit Project</span>
+       </div>
+      </nav>
+      <div class="mt-auto pt-6"><button onclick="logout()" class="w-full px-4 py-3 rounded-xl font-semibold text-white" style="background: rgba(239, 68, 68, 0.3);"> 🚪 Logout </button>
+      </div>
+     </aside><!-- Student Content -->
+     <main class="flex-1 p-8 overflow-auto"><!-- Overview -->
+      <div id="student-view-overview">
+       <h1 class="text-4xl font-bold text-white mb-8">Welcome Back!</h1>
+       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-4xl mb-3">
+          📚
+         </div>
+         <h3 class="text-gray-300 text-sm font-semibold mb-2">Enrolled Course</h3>
+         <p id="student-course" class="text-2xl font-bold text-white">-</p>
+        </div>
+        <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-4xl mb-3">
+          📂
+         </div>
+         <h3 class="text-gray-300 text-sm font-semibold mb-2">Projects Submitted</h3>
+         <p id="student-projects-count" class="text-2xl font-bold text-white">0</p>
+        </div>
+        <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+         <div class="text-4xl mb-3">
+          ⭐
+         </div>
+         <h3 class="text-gray-300 text-sm font-semibold mb-2">Average Grade</h3>
+         <p id="student-avg-grade" class="text-2xl font-bold text-white">-</p>
+        </div>
+       </div>
+       <div class="card-hover p-6 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+        <h2 class="text-2xl font-bold text-white mb-4">Recent Projects</h2>
+        <div id="student-recent-projects" class="space-y-4">
+         <p class="text-gray-400 text-center py-8">No projects submitted yet</p>
+        </div>
+       </div>
+      </div><!-- My Projects -->
+      <div id="student-view-projects" class="hidden">
+       <h1 class="text-4xl font-bold text-white mb-8">My Projects</h1>
+       <div id="student-projects-list" class="space-y-4">
+        <p class="text-gray-400 text-center py-8">No projects found</p>
+       </div>
+      </div><!-- Submit Project -->
+      <div id="student-view-submit" class="hidden">
+       <h1 class="text-4xl font-bold text-white mb-8">Submit New Project</h1>
+       <div class="max-w-2xl card-hover p-8 rounded-2xl" style="background: rgba(15, 23, 42, 0.6);">
+        <form id="student-project-form" class="space-y-6">
+         <div><label class="block text-white font-semibold mb-2">Project Title</label> <input type="text" id="sp-title" class="w-full px-4 py-3 rounded-xl" placeholder="My Awesome Project" required>
+         </div>
+         <div><label class="block text-white font-semibold mb-2">Description</label> <textarea id="sp-description" class="w-full px-4 py-3 rounded-xl" rows="5" placeholder="Describe your project..." required></textarea>
+         </div>
+         <div><label class="block text-white font-semibold mb-2">Project URL</label> <input type="url" id="sp-url" class="w-full px-4 py-3 rounded-xl" placeholder="https://github.com/..." required>
+         </div><button type="submit" id="student-project-submit" class="btn-primary w-full py-4 text-white font-bold rounded-xl text-lg"> Submit Project </button>
+        </form>
+       </div>
+      </div>
+     </main>
+    </div>
+   </div><!-- Toast Notification -->
+   <div id="toast" class="hidden fixed top-6 right-6 z-[100] px-6 py-4 rounded-xl text-white font-semibold shadow-2xl">
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      company_name: "NextGen Coder",
+      tagline: "Transforming Ideas into Digital Reality",
+      about_heading: "About NextGen Coder",
+      about_text: "NextGen Coder is a forward-thinking software development company dedicated to turning innovative ideas into powerful digital solutions. With expertise spanning web development, mobile applications, and custom software engineering, we empower businesses to thrive in the digital landscape.",
+      services_heading: "Our Services",
+      contact_heading: "Get In Touch",
+      phone_number: "9762317835",
+      email_address: "info.codernextgencoder@gmail.com",
+      primary_color: "#06b6d4",
+      secondary_color: "#3b82f6",
+      accent_color: "#8b5cf6",
+      text_color: "#e2e8f0",
+      background_color: "#0f172a",
+      font_family: "Space Grotesk",
+      font_size: 16
+    };
+
+    let allRecords = [];
+    let currentUser = null;
+    let currentLoginMode = 'admin';
+
+    // Toast notification
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.style.background = type === 'success' ? 'linear-gradient(135deg, #10b981, #06b6d4)' : 
+                                type === 'error' ? 'linear-gradient(135deg, #ef4444, #dc2626)' : 
+                                'linear-gradient(135deg, #3b82f6, #8b5cf6)';
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
+
+    // Login modal functions
+    window.showLoginModal = () => {
+      document.getElementById('login-modal').classList.remove('hidden');
+    };
+
+    window.hideLoginModal = () => {
+      document.getElementById('login-modal').classList.add('hidden');
+      document.getElementById('login-form').reset();
+    };
+
+    // Login mode switching
+    document.getElementById('login-admin-btn').addEventListener('click', () => {
+      currentLoginMode = 'admin';
+      document.getElementById('login-admin-btn').style.background = 'linear-gradient(135deg, #06b6d4, #3b82f6)';
+      document.getElementById('login-admin-btn').style.border = 'none';
+      document.getElementById('login-student-btn').style.background = 'rgba(15, 23, 42, 0.6)';
+      document.getElementById('login-student-btn').style.border = '2px solid rgba(6, 182, 212, 0.3)';
+    });
+
+    document.getElementById('login-student-btn').addEventListener('click', () => {
+      currentLoginMode = 'student';
+      document.getElementById('login-student-btn').style.background = 'linear-gradient(135deg, #06b6d4, #3b82f6)';
+      document.getElementById('login-student-btn').style.border = 'none';
+      document.getElementById('login-admin-btn').style.background = 'rgba(15, 23, 42, 0.6)';
+      document.getElementById('login-admin-btn').style.border = '2px solid rgba(6, 182, 212, 0.3)';
+    });
+
+    // Login handler
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      
+      const btn = document.getElementById('login-submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+      
+      // Demo login
+      if (currentLoginMode === 'admin' && username === 'admin' && password === 'admin123') {
+        currentUser = { role: 'admin', username: 'admin' };
+        hideLoginModal();
+        document.getElementById('admin-dashboard').classList.remove('hidden');
+        showToast('Welcome back, Administrator!', 'success');
+      } else if (currentLoginMode === 'student' && username === 'student' && password === 'student123') {
+        currentUser = { role: 'student', username: 'student', student_id: 'DEMO' };
+        hideLoginModal();
+        document.getElementById('student-dashboard').classList.remove('hidden');
+        showToast('Welcome, Student!', 'success');
+        renderStudentData();
+      } else {
+        // Check user records
+        const user = allRecords.find(r => r.type === 'user' && r.username === username && r.password === password && r.role === currentLoginMode);
+        if (user) {
+          currentUser = user;
+          hideLoginModal();
+          if (user.role === 'student') {
+            const student = allRecords.find(r => r.type === 'student' && r.__backendId === user.student_id);
+            if (student) {
+              document.getElementById('student-name-display').textContent = student.name;
+            }
+            document.getElementById('student-dashboard').classList.remove('hidden');
+            showToast(`Welcome, ${student ? student.name : 'Student'}!`, 'success');
+            renderStudentData();
+          } else {
+            document.getElementById('admin-dashboard').classList.remove('hidden');
+            showToast('Welcome back, Administrator!', 'success');
+          }
+        } else {
+          showToast('Invalid credentials. Please try again.', 'error');
+        }
+      }
+      
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    });
+
+    // Logout
+    window.logout = () => {
+      currentUser = null;
+      document.getElementById('admin-dashboard').classList.add('hidden');
+      document.getElementById('student-dashboard').classList.add('hidden');
+      showToast('Logged out successfully', 'info');
+    };
+
+    // Admin view switching
+    window.switchAdminView = (view) => {
+      ['students', 'projects', 'versions', 'users'].forEach(v => {
+        const el = document.getElementById(`admin-view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+      const targetEl = document.getElementById(`admin-view-${view}`);
+      if (targetEl) targetEl.classList.remove('hidden');
+      
+      document.querySelectorAll('#admin-dashboard .sidebar-item').forEach(item => {
+        item.classList.remove('active');
+        item.style.color = 'white';
+      });
+      event.target.closest('.sidebar-item').classList.add('active');
+    };
+
+    // Student view switching
+    window.switchStudentView = (view) => {
+      ['overview', 'projects', 'submit'].forEach(v => {
+        const el = document.getElementById(`student-view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+      const targetEl = document.getElementById(`student-view-${view}`);
+      if (targetEl) targetEl.classList.remove('hidden');
+      
+      document.querySelectorAll('#student-dashboard .sidebar-item').forEach(item => {
+        item.classList.remove('active');
+        item.style.color = 'white';
+      });
+      event.target.closest('.sidebar-item').classList.add('active');
+    };
+
+    // Render admin students
+    function renderAdminStudents() {
+      const students = allRecords.filter(r => r.type === 'student');
+      const tbody = document.getElementById('admin-students-table');
+      
+      if (students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-gray-400">No students found</td></tr>';
+      } else {
+        tbody.innerHTML = students.map(s => `
+          <tr class="border-b" style="border-color: rgba(6, 182, 212, 0.1);">
+            <td class="px-4 py-3 font-semibold text-white">${s.name}</td>
+            <td class="px-4 py-3 text-gray-300">${s.email}</td>
+            <td class="px-4 py-3 text-gray-300">${s.course}</td>
+            <td class="px-4 py-3 text-center">
+              <button onclick="deleteStudent('${s.__backendId}')" class="px-3 py-1 text-sm font-semibold rounded" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+      
+      // Update student select
+      const select = document.getElementById('au-student');
+      select.innerHTML = '<option value="">Select Student</option>' + 
+        students.map(s => `<option value="${s.__backendId}">${s.name}</option>`).join('');
+    }
+
+    // Render admin projects
+    function renderAdminProjects() {
+      const projects = allRecords.filter(r => r.type === 'project');
+      const students = allRecords.filter(r => r.type === 'student');
+      const container = document.getElementById('admin-projects-list');
+      
+      if (projects.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-center py-8">No projects found</p>';
+      } else {
+        container.innerHTML = projects.map(p => {
+          const student = students.find(s => s.name === p.student_name);
+          return `
+            <div class="p-6 rounded-xl border-2" style="background: rgba(15, 23, 42, 0.4); border-color: rgba(6, 182, 212, 0.2);">
+              <div class="flex justify-between items-start mb-4">
+                <div>
+                  <h3 class="text-xl font-bold text-white mb-2">${p.project_title}</h3>
+                  <p class="text-gray-400 mb-2">${p.project_description}</p>
+                  <p class="text-sm text-gray-500">By: ${p.student_name} • ${new Date(p.submitted_date).toLocaleDateString()}</p>
+                </div>
+                <span class="px-3 py-1 rounded-lg text-sm font-semibold ${p.grade ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}">
+                  ${p.grade || 'Pending'}
+                </span>
+              </div>
+              <div class="flex gap-3">
+                <a href="${p.project_url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg font-semibold" style="background: rgba(6, 182, 212, 0.2); color: #06b6d4;">
+                  View Project
+                </a>
+                <button onclick="gradeProject('${p.__backendId}')" class="px-4 py-2 rounded-lg font-semibold" style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6;">
+                  ${p.grade ? 'Update Grade' : 'Grade Project'}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+
+    // Render admin users
+    function renderAdminUsers() {
+      const users = allRecords.filter(r => r.type === 'user');
+      const tbody = document.getElementById('admin-users-table');
+      
+      if (users.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-gray-400">No users found</td></tr>';
+      } else {
+        tbody.innerHTML = users.map(u => `
+          <tr class="border-b" style="border-color: rgba(6, 182, 212, 0.1);">
+            <td class="px-4 py-3 font-semibold text-white">${u.username}</td>
+            <td class="px-4 py-3 text-gray-300">${u.role}</td>
+            <td class="px-4 py-3"><span class="px-3 py-1 rounded-lg text-xs font-semibold" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">${u.status || 'Active'}</span></td>
+            <td class="px-4 py-3 text-center">
+              <button onclick="deleteUser('${u.__backendId}')" class="px-3 py-1 text-sm font-semibold rounded" style="background: rgba(239, 68, 68, 0.2); color: #ef4444;">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    // Render student data
+    function renderStudentData() {
+      if (!currentUser || currentUser.role !== 'student') return;
+      
+      let student;
+      if (currentUser.student_id === 'DEMO') {
+        student = { name: 'Demo Student', course: 'Full Stack Development' };
+      } else {
+        student = allRecords.find(r => r.type === 'student' && r.__backendId === currentUser.student_id);
+      }
+      
+      if (student) {
+        document.getElementById('student-course').textContent = student.course;
+      }
+      
+      const projects = allRecords.filter(r => r.type === 'project' && r.student_name === student.name);
+      document.getElementById('student-projects-count').textContent = projects.length;
+      
+      // Calculate average grade
+      const gradedProjects = projects.filter(p => p.grade);
+      if (gradedProjects.length > 0) {
+        const avg = gradedProjects.reduce((sum, p) => sum + parseFloat(p.grade), 0) / gradedProjects.length;
+        document.getElementById('student-avg-grade').textContent = avg.toFixed(1);
+      } else {
+        document.getElementById('student-avg-grade').textContent = '-';
+      }
+      
+      // Recent projects
+      const recentContainer = document.getElementById('student-recent-projects');
+      const projectsContainer = document.getElementById('student-projects-list');
+      
+      if (projects.length === 0) {
+        recentContainer.innerHTML = '<p class="text-gray-400 text-center py-8">No projects submitted yet</p>';
+        projectsContainer.innerHTML = '<p class="text-gray-400 text-center py-8">No projects found</p>';
+      } else {
+        const projectHTML = projects.map(p => `
+          <div class="p-6 rounded-xl border-2" style="background: rgba(15, 23, 42, 0.4); border-color: rgba(6, 182, 212, 0.2);">
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-white">${p.project_title}</h3>
+              <span class="px-3 py-1 rounded-lg text-sm font-semibold ${p.grade ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}">
+                ${p.grade || 'Pending'}
+              </span>
+            </div>
+            <p class="text-gray-400 mb-3">${p.project_description}</p>
+            <div class="flex justify-between items-center">
+              <p class="text-sm text-gray-500">${new Date(p.submitted_date).toLocaleDateString()}</p>
+              <a href="${p.project_url}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-lg font-semibold" style="background: rgba(6, 182, 212, 0.2); color: #06b6d4;">
+                View Project
+              </a>
+            </div>
+            ${p.feedback ? `<div class="mt-3 p-3 rounded-lg" style="background: rgba(139, 92, 246, 0.1);"><p class="text-sm text-gray-300"><strong class="text-purple-400">Feedback:</strong> ${p.feedback}</p></div>` : ''}
+          </div>
+        `).join('');
+        
+        recentContainer.innerHTML = projectHTML;
+        projectsContainer.innerHTML = projectHTML;
+      }
+    }
+
+    // Admin student form
+    document.getElementById('admin-student-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (allRecords.length >= 999) {
+        showToast('Maximum limit of 999 records reached', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('admin-student-submit');
+      btn.disabled = true;
+      btn.textContent = 'Saving...';
+      
+      const student = {
+        type: 'student',
+        student_id: 'STU' + Date.now(),
+        name: document.getElementById('as-name').value,
+        email: document.getElementById('as-email').value,
+        phone: document.getElementById('as-phone').value,
+        course: document.getElementById('as-course').value,
+        enrollment_date: new Date().toISOString(),
+        status: 'Active',
+        timestamp: new Date().toISOString()
+      };
+      
+      const result = await window.dataSdk.create(student);
+      
+      btn.disabled = false;
+      btn.textContent = 'Add Student';
+      
+      if (result.isOk) {
+        showToast('Student added successfully!');
+        document.getElementById('admin-student-form').reset();
+      } else {
+        showToast('Failed to add student', 'error');
+      }
+    });
+
+    // Admin user form
+    document.getElementById('au-role').addEventListener('change', (e) => {
+      const wrapper = document.getElementById('au-student-select-wrapper');
+      if (e.target.value === 'student') {
+        wrapper.classList.remove('hidden');
+      } else {
+        wrapper.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('admin-user-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (allRecords.length >= 999) {
+        showToast('Maximum limit of 999 records reached', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('admin-user-submit');
+      btn.disabled = true;
+      btn.textContent = 'Creating...';
+      
+      const user = {
+        type: 'user',
+        user_id: 'USER' + Date.now(),
+        username: document.getElementById('au-username').value,
+        password: document.getElementById('au-password').value,
+        role: document.getElementById('au-role').value,
+        student_id: document.getElementById('au-student').value || null,
+        status: 'Active',
+        timestamp: new Date().toISOString()
+      };
+      
+      const result = await window.dataSdk.create(user);
+      
+      btn.disabled = false;
+      btn.textContent = 'Create User';
+      
+      if (result.isOk) {
+        showToast('User created successfully!');
+        document.getElementById('admin-user-form').reset();
+      } else {
+        showToast('Failed to create user', 'error');
+      }
+    });
+
+    // Student project form
+    document.getElementById('student-project-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (allRecords.length >= 999) {
+        showToast('Maximum limit of 999 records reached', 'error');
+        return;
+      }
+      
+      const btn = document.getElementById('student-project-submit');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      
+      let studentName;
+      if (currentUser.student_id === 'DEMO') {
+        studentName = 'Demo Student';
+      } else {
+        const student = allRecords.find(r => r.type === 'student' && r.__backendId === currentUser.student_id);
+        studentName = student ? student.name : 'Unknown';
+      }
+      
+      const project = {
+        type: 'project',
+        project_title: document.getElementById('sp-title').value,
+        project_description: document.getElementById('sp-description').value,
+        project_url: document.getElementById('sp-url').value,
+        student_name: studentName,
+        submitted_date: new Date().toISOString(),
+        grade: null,
+        feedback: null,
+        timestamp: new Date().toISOString()
+      };
+      
+      const result = await window.dataSdk.create(project);
+      
+      btn.disabled = false;
+      btn.textContent = 'Submit Project';
+      
+      if (result.isOk) {
+        showToast('Project submitted successfully!');
+        document.getElementById('student-project-form').reset();
+        renderStudentData();
+      } else {
+        showToast('Failed to submit project', 'error');
+      }
+    });
+
+    // Grade project function
+    window.gradeProject = (projectId) => {
+      const project = allRecords.find(r => r.__backendId === projectId);
+      if (!project) return;
+      
+      const grade = prompt('Enter grade (0-100):', project.grade || '');
+      if (grade === null) return;
+      
+      const feedback = prompt('Enter feedback:', project.feedback || '');
+      if (feedback === null) return;
+      
+      project.grade = grade;
+      project.feedback = feedback;
+      
+      window.dataSdk.update(project).then(result => {
+        if (result.isOk) {
+          showToast('Grade updated successfully!');
+        } else {
+          showToast('Failed to update grade', 'error');
+        }
+      });
+    };
+
+    // Publish version
+    window.publishVersion = () => {
+      showToast('Version 1.0 is already in production!', 'info');
+    };
+
+    // Delete functions
+    window.deleteStudent = async (id) => {
+      const student = allRecords.find(r => r.__backendId === id);
+      if (!student) return;
+      const result = await window.dataSdk.delete(student);
+      if (result.isOk) showToast('Student deleted');
+      else showToast('Failed to delete', 'error');
+    };
+
+    window.deleteUser = async (id) => {
+      const user = allRecords.find(r => r.__backendId === id);
+      if (!user) return;
+      const result = await window.dataSdk.delete(user);
+      if (result.isOk) showToast('User deleted');
+      else showToast('Failed to delete', 'error');
+    };
+
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+
+    // Active nav link on scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(section => {
+        const sectionHeight = section.offsetHeight;
+        const sectionTop = section.offsetTop - 100;
+        const sectionId = section.getAttribute('id');
+        const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+        if (navLink && scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+          });
+          navLink.classList.add('active');
+        }
+      });
+    });
+
+    // Contact form submission
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const messageDiv = document.getElementById('form-message');
+      messageDiv.textContent = 'Thank you for your message! We will get back to you soon.';
+      messageDiv.style.background = 'linear-gradient(135deg, #10b981, #06b6d4)';
+      messageDiv.style.color = 'white';
+      messageDiv.classList.remove('hidden');
+      
+      document.getElementById('contact-form').reset();
+      
+      setTimeout(() => {
+        messageDiv.classList.add('hidden');
+      }, 5000);
+    });
+
+    // Data SDK handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data;
+        renderAdminStudents();
+        renderAdminProjects();
+        renderAdminUsers();
+        if (currentUser && currentUser.role === 'student') {
+          renderStudentData();
+        }
+      }
+    };
+
+    // Element SDK config
+    async function onConfigChange(config) {
+      const baseFont = config.font_family || defaultConfig.font_family;
+      const baseFontStack = `${baseFont}, -apple-system, BlinkMacSystemFont, sans-serif`;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      
+      document.getElementById('nav-company-name').textContent = config.company_name || defaultConfig.company_name;
+      document.getElementById('hero-company-name').textContent = config.company_name || defaultConfig.company_name;
+      document.getElementById('footer-company-name').textContent = config.company_name || defaultConfig.company_name;
+      
+      document.getElementById('hero-tagline').textContent = config.tagline || defaultConfig.tagline;
+      document.getElementById('about-heading').textContent = config.about_heading || defaultConfig.about_heading;
+      document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+      document.getElementById('services-heading').textContent = config.services_heading || defaultConfig.services_heading;
+      document.getElementById('contact-heading').textContent = config.contact_heading || defaultConfig.contact_heading;
+      
+      const phone = config.phone_number || defaultConfig.phone_number;
+      const email = config.email_address || defaultConfig.email_address;
+      document.getElementById('contact-phone').textContent = phone;
+      document.getElementById('contact-phone').href = `tel:${phone}`;
+      document.getElementById('contact-email').textContent = email;
+      document.getElementById('contact-email').href = `mailto:${email}`;
+      
+      document.body.style.fontFamily = baseFontStack;
+      
+      document.querySelectorAll('.section-title').forEach(el => {
+        el.style.fontSize = `${baseSize * 3}px`;
+      });
+    }
+
+    // Initialize SDKs
+    (async () => {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        showToast('Failed to initialize data system', 'error');
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.primary_color || defaultConfig.primary_color,
+                set: (value) => {
+                  config.primary_color = value;
+                  window.elementSdk.setConfig({ primary_color: value });
+                }
+              },
+              {
+                get: () => config.secondary_color || defaultConfig.secondary_color,
+                set: (value) => {
+                  config.secondary_color = value;
+                  window.elementSdk.setConfig({ secondary_color: value });
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                config.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                config.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["company_name", config.company_name || defaultConfig.company_name],
+            ["tagline", config.tagline || defaultConfig.tagline],
+            ["about_heading", config.about_heading || defaultConfig.about_heading],
+            ["about_text", config.about_text || defaultConfig.about_text],
+            ["services_heading", config.services_heading || defaultConfig.services_heading],
+            ["contact_heading", config.contact_heading || defaultConfig.contact_heading],
+            ["phone_number", config.phone_number || defaultConfig.phone_number],
+            ["email_address", config.email_address || defaultConfig.email_address]
+          ])
+        });
+      }
+    })();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c7049c59572bc8e',t:'MTc2OTkzNjczOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
