@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Menu • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html"><span>Gyan Bakery</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="custom-cake.html">Custom Cake</a>
+        <a href="cart.html" class="btn outline">Cart <span id="cartBadge" class="badge" style="display:none;"></span></a>
+        <a href="profile.html" class="btn primary">My Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container mt-4">
+    <h1>Our Menu</h1>
+    <div class="flex flex-wrap gap-2 mt-4 items-center justify-between">
+      <div class="flex gap-2" style="overflow-x: auto; padding-bottom: 0.5rem;">
+        <button class="btn outline" onclick="renderProducts('allProductsGrid', '')">All</button>
+        <button class="btn outline" onclick="renderProducts('allProductsGrid', 'cakes')">Cakes</button>
+        <button class="btn outline" onclick="renderProducts('allProductsGrid', 'breads')">Breads</button>
+        <button class="btn outline" onclick="renderProducts('allProductsGrid', 'pastries')">Pastries</button>
+        <button class="btn outline" onclick="renderProducts('allProductsGrid', 'cookies')">Cookies</button>
+      </div>
+      
+      <div class="flex gap-2 items-center">
+        <input type="text" id="productSearch" placeholder="Search products..." class="form-control" oninput="handleFilterChange()" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #d1d5db;">
+        <select id="priceSort" class="form-control" onchange="handleFilterChange()" style="padding: 0.5rem; border-radius: 6px; border: 1px solid #d1d5db;">
+          <option value="none">Sort By</option>
+          <option value="low">Price: Low to High</option>
+          <option value="high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+    
+    <div id="allProductsGrid" class="grid-4 mt-4"></div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">🎂 Gyan Bakery</div>
+        <p>Baking memories since 2010. 100% artisanal, eggless options available.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Twitter">x</a>
+          <a href="#" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">📦 Track Order</a></p>
+        <p><a href="profile.html">👤 My Account</a></p>
+        <p><a href="products.html">🛍️ Shop Now</a></p>
+      </div>
+      <div>
+        <h3>Contact & Hours</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@gyanbakery.com</p>
+        <p style="margin-top: 1rem; color: #fff; font-size: 0.9rem; opacity: 0.8;">Mon-Sun: 9AM - 9PM</p>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Refund Policy</a>
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Gyan Bakery. All rights reserved. ❤️</p>
+    </div>
+  </footer>
+
+  <script src="assets/customer.js"></script>
+</body>
+</html>

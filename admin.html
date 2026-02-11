@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Admin Dashboard • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/invoice.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .status-select { padding: 0.25rem; border-radius: 4px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body style="background: #f3f4f6;">
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span>Gyan Admin</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">View Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container mt-4">
+    <div class="flex justify-between items-center">
+      <h1>Admin Dashboard</h1>
+      <div class="tabs flex gap-2">
+        <button class="btn active-tab" onclick="showTab('orders')">Orders</button>
+        <button class="btn outline" onclick="showTab('products')">Products</button>
+        <button class="btn outline" onclick="showTab('users')">Users</button>
+        <button class="btn outline" onclick="showTab('gallery')">Gallery</button>
+        <button class="btn outline" onclick="showTab('blogs')">Blog</button>
+        <button class="btn outline" onclick="showTab('reviews')">Reviews</button>
+        <button class="btn outline" onclick="showTab('videos')">Videos</button>
+        <button class="btn outline" onclick="showTab('analytics')">Analytics</button>
+      </div>
+    </div>
+    
+    <!-- Orders Tab -->
+    <div id="ordersTab" class="tab-content">
+      <div class="grid-3 mt-4">
+        <div class="stat-card">
+          <h3>Total Orders</h3>
+          <div class="stat-val" id="totalOrders">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Revenue</h3>
+          <div class="stat-val" id="totalRevenue">₹0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Pending</h3>
+          <div class="stat-val" id="pendingOrders">0</div>
+        </div>
+      </div>
+
+      <h2 class="mt-4">Recent Orders</h2>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Products Tab -->
+    <div id="productsTab" class="tab-content" style="display:none;">
+      <div class="flex justify-between items-center mt-4">
+        <h2>Manage Products</h2>
+        <button class="btn primary" onclick="openProductModal()">Add Product</button>
+      </div>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminProductsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Users Tab -->
+    <div id="usersTab" class="tab-content" style="display:none;">
+      <h2 class="mt-4">Manage Users</h2>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Wallet</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Gallery Tab -->
+    <div id="galleryTab" class="tab-content" style="display:none;">
+      <div class="flex justify-between items-center mt-4">
+        <h2>Manage Gallery</h2>
+        <button class="btn primary" onclick="openGalleryModal()">Add Image</button>
+      </div>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminGalleryTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Blogs Tab -->
+    <div id="blogsTab" class="tab-content" style="display:none;">
+      <div class="flex justify-between items-center mt-4">
+        <h2>Manage Blogs</h2>
+        <button class="btn primary" onclick="openBlogModal()">Create Post</button>
+      </div>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminBlogsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reviews Tab -->
+    <div id="reviewsTab" class="tab-content" style="display:none;">
+      <div class="flex justify-between items-center mt-4">
+        <h2>Manage Reviews</h2>
+        <button class="btn primary" onclick="openReviewModal()">Add Review</button>
+      </div>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminReviewsTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Videos Tab -->
+    <div id="videosTab" class="tab-content" style="display:none;">
+      <div class="flex justify-between items-center mt-4">
+        <h2>Manage Videos</h2>
+        <button class="btn primary" onclick="openVideoModal()">Add Video</button>
+      </div>
+      <div class="mt-4 table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminVideosTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Analytics Tab -->
+    <div id="analyticsTab" class="tab-content" style="display:none;">
+      <h2 class="mt-4">Business Analytics</h2>
+      <div class="grid-2 mt-4">
+        <div class="stat-card">
+          <h3>Order Trends</h3>
+          <canvas id="orderChart"></canvas>
+        </div>
+        <div class="stat-card">
+          <h3>Revenue by Category</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Product</h2>
+      <form id="productForm" onsubmit="saveProduct(event)">
+        <input type="hidden" id="prodId">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input type="text" id="prodName" required>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="prodCategory">
+            <option value="cakes">Cakes</option>
+            <option value="breads">Breads</option>
+            <option value="pastries">Pastries</option>
+            <option value="cookies">Cookies</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Price (₹)</label>
+          <input type="number" id="prodPrice" required>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="prodDesc" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Product Image</label>
+          <input type="file" id="prodImage" accept="image/*" class="form-control">
+          <small class="text-muted">Choose a local image file</small>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn primary">Save Product</button>
+          <button type="button" class="btn outline" onclick="closeProductModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- Gallery Modal -->
+  <div id="galleryModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2 id="galleryModalTitle">Add Gallery Image</h2>
+      <form id="galleryForm" onsubmit="saveGalleryImage(event)">
+        <input type="hidden" id="galleryEditIdx" value="-1">
+        <div class="form-group">
+          <label>Image Type</label>
+          <select id="galleryType" onchange="toggleGalleryInput(this.value)">
+            <option value="url">External URL</option>
+            <option value="upload">Upload File</option>
+          </select>
+        </div>
+        <div class="form-group" id="galleryUrlGroup">
+          <label>Image URL</label>
+          <input type="url" id="galleryUrlInput" placeholder="https://example.com/image.jpg">
+        </div>
+        <div class="form-group" id="galleryUploadGroup" style="display:none;">
+          <label>Upload Image</label>
+          <input type="file" id="galleryUploadInput" accept="image/*">
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn primary">Add to Gallery</button>
+          <button type="button" class="btn outline" onclick="closeGalleryModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Blog Modal -->
+  <div id="blogModal" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width: 600px;">
+      <h2 id="blogModalTitle">Create Blog Post</h2>
+      <form id="blogForm" onsubmit="saveBlogPost(event)">
+        <input type="hidden" id="blogEditIdx" value="-1">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" id="blogTitleInput" required>
+        </div>
+        <div class="form-group">
+          <label>Content Preview (Summary)</label>
+          <textarea id="blogSummaryInput" rows="2" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Full Content</label>
+          <textarea id="blogContentInput" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Featured Image (URL or Upload)</label>
+          <div class="flex gap-2">
+            <input type="text" id="blogImageInput" placeholder="URL" style="flex:1;">
+            <input type="file" id="blogUploadInput" accept="image/*" style="width: 100px; font-size: 0.7rem;">
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn primary">Save Post</button>
+          <button type="button" class="btn outline" onclick="closeBlogModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review Modal -->
+  <div id="reviewModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2 id="reviewModalTitle">Add Customer Review</h2>
+      <form id="reviewForm" onsubmit="saveReview(event)">
+        <input type="hidden" id="reviewEditIdx" value="-1">
+        <div class="form-group">
+          <label>Customer Name</label>
+          <input type="text" id="reviewNameInput" required>
+        </div>
+        <div class="form-group">
+          <label>Rating (1-5)</label>
+          <input type="number" id="reviewRatingInput" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+          <label>Comment</label>
+          <textarea id="reviewCommentInput" rows="3" required></textarea>
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn primary">Save Review</button>
+          <button type="button" class="btn outline" onclick="closeReviewModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h2 id="videoModalTitle">Add Video Highlights</h2>
+      <form id="videoForm" onsubmit="saveVideo(event)">
+        <input type="hidden" id="videoEditIdx" value="-1">
+        <div class="form-group">
+          <label>Video Title</label>
+          <input type="text" id="videoTitleInput" required>
+        </div>
+        <div class="form-group">
+          <label>Video Type</label>
+          <select id="videoType" onchange="toggleVideoInput(this.value)">
+            <option value="url">External Link (YouTube/URL)</option>
+            <option value="upload">Upload File</option>
+          </select>
+        </div>
+        <div class="form-group" id="videoUrlGroup">
+          <label>Video URL</label>
+          <input type="url" id="videoUrlInput" placeholder="https://youtube.com/...">
+        </div>
+        <div class="form-group" id="videoUploadGroup" style="display:none;">
+          <label>Upload Video</label>
+          <input type="file" id="videoUploadInput" accept="video/*">
+        </div>
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="btn primary">Save Video</button>
+          <button type="button" class="btn outline" onclick="closeVideoModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/admin.js"></script>
+
+  <!-- Invoice Modal -->
+  <div id="invoiceModal" class="modal" style="display:none; align-items:flex-start; padding-top:2rem;">
+    <div style="background:white; padding:1.5rem; border-radius:12px; width:100%; max-width:800px; position:relative;">
+      <div class="flex justify-between items-center mb-4 no-print">
+        <h3>Order Invoice</h3>
+        <div class="flex gap-2">
+          <button class="btn primary sm" onclick="window.print()">Print</button>
+          <button class="btn outline sm" onclick="closeInvoice()">Close</button>
+        </div>
+      </div>
+      <div id="invoiceContent" class="invoice-box">
+        <!-- Generated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.viewInvoice = (id) => {
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      const order = orders.find(o => o.id === id);
+      if (!order) return;
+
+      const modal = document.getElementById("invoiceModal");
+      const content = document.getElementById("invoiceContent");
+
+      const subtotal = order.items.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const delivery = 40;
+      const total = subtotal + delivery;
+
+      content.innerHTML = `
+        <table cellpadding="0" cellspacing="0">
+          <tr class="top">
+            <td colspan="2">
+              <table>
+                <tr>
+                  <td class="title">GYAN BAKERY</td>
+                  <td>
+                    Invoice #: ${order.id}<br>
+                    Created: ${order.date}<br>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="information">
+            <td colspan="2">
+              <table>
+                <tr>
+                  <td>
+                    Gyan Bakery, Inc.<br>
+                    123 Bakers Street<br>
+                    Patna, Bihar 800001
+                  </td>
+                  <td>
+                    ${order.customerName || 'Customer'}<br>
+                    ${order.customerEmail || ''}<br>
+                    ${order.customerPhone ? 'Phone: ' + order.customerPhone : ''}<br>
+                    ${order.customerAddress ? 'Address: ' + order.customerAddress : ''}<br>
+                    Paid via ${order.payment}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr class="heading">
+            <td>Item</td>
+            <td>Price</td>
+          </tr>
+          ${order.items.map(item => `
+            <tr class="item">
+              <td>${item.name} (x${item.qty})</td>
+              <td>₹${item.price * item.qty}</td>
+            </tr>
+          `).join("")}
+          <tr class="item">
+            <td>Delivery Fee</td>
+            <td>₹${delivery}</td>
+          </tr>
+          <tr class="total">
+            <td></td>
+            <td>Total: ₹${total}</td>
+          </tr>
+        </table>
+      `;
+
+      modal.style.display = "flex";
+    };
+
+    window.closeInvoice = () => {
+      document.getElementById("invoiceModal").style.display = "none";
+    };
+  </script>
+</body>
+
+</html>

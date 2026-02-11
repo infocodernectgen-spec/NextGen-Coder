@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>About Us • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html"><span>Gyan Bakery</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html" class="btn outline">Cart <span id="cartBadge" class="badge" style="display:none;"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container mt-4">
+    <div class="grid-2 items-center">
+      <div>
+        <h1>Our Story</h1>
+        <p>Founded in 2010, Gyan Bakery started with a simple mission: to bring the authentic taste of home-baked goods to everyone. What began as a small home kitchen has now grown into a beloved community bakery.</p>
+        <p class="mt-4">We believe in using only the finest ingredients - fresh cream, pure butter, and locally sourced fruits. No preservatives, just pure love.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=800&q=80" alt="Bakers at work" style="border-radius:12px; width:100%;">
+    </div>
+
+    <div class="mt-4" style="background:#fffaf0; padding:3rem; border-radius:12px; box-shadow:var(--shadow); border-left: 5px solid var(--accent);">
+      <h2 class="text-center">Our Commitment to Quality</h2>
+      <div class="grid-3 mt-4 text-center">
+        <div>
+          <div style="font-size:2.5rem; margin-bottom:1rem;">🧤</div>
+          <h3>Absolute Hygiene</h3>
+          <p class="text-muted">Medical-grade sanitization across all our baking workstations.</p>
+        </div>
+        <div>
+          <div style="font-size:2.5rem; margin-bottom:1rem;">🍰</div>
+          <h3>Fresh Daily</h3>
+          <p class="text-muted">Every loaf and cake is baked from scratch every single morning.</p>
+        </div>
+        <div>
+          <div style="font-size:2.5rem; margin-bottom:1rem;">❤️</div>
+          <h3>Pure Ingredients</h3>
+          <p class="text-muted">Farm-fresh cream, premium cocoa, and zero preservatives.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h2 class="text-center">Our Process in Action</h2>
+      <div id="dynamicProcessGrid" class="grid-3 mt-4">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const defaultGallery = [
+          "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?auto=format&fit=crop&w=600&q=80"
+        ];
+        const gallery = JSON.parse(localStorage.getItem("bakeryGallery") || JSON.stringify(defaultGallery));
+        const grid = document.getElementById("dynamicProcessGrid");
+        if (grid) {
+          // Take only the first 3 if needed, or all 3
+          grid.innerHTML = gallery.slice(0, 3).map(img => `
+            <img src="${img}" style="border-radius:12px; width:100%; height:250px; object-fit:cover;" alt="Process Step">
+          `).join("");
+        }
+      });
+    </script>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">🎂 Gyan Bakery</div>
+        <p>Baking memories since 2010. 100% artisanal, eggless options available.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Twitter">x</a>
+          <a href="#" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">📦 Track Order</a></p>
+        <p><a href="profile.html">👤 My Account</a></p>
+        <p><a href="products.html">🛍️ Shop Now</a></p>
+      </div>
+      <div>
+        <h3>Contact & Hours</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@gyanbakery.com</p>
+        <p style="margin-top: 1rem; color: #fff; font-size: 0.9rem; opacity: 0.8;">Mon-Sun: 9AM - 9PM</p>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Refund Policy</a>
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Gyan Bakery. All rights reserved. ❤️</p>
+    </div>
+  </footer>
+</body>
+</html>

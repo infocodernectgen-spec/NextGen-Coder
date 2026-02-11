@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Design Your Cake • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html"><span>Gyan Bakery</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="custom-cake.html" class="active">Custom Cake</a>
+        <a href="cart.html" class="btn outline">Cart <span id="cartBadge" class="badge" style="display:none;"></span></a>
+        <a href="profile.html" class="btn primary">My Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container mt-4">
+    <div class="grid-2">
+      <div>
+        <h1>Design Your Cake</h1>
+        <p class="text-muted">Create the perfect cake for your special occasion.</p>
+        
+        <form id="customCakeForm" class="mt-4" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: var(--shadow);">
+          <div class="form-group">
+            <label>Flavor</label>
+            <select name="flavor" required>
+              <option value="Vanilla">Vanilla</option>
+              <option value="Chocolate">Chocolate</option>
+              <option value="Red Velvet">Red Velvet</option>
+              <option value="Butterscotch">Butterscotch</option>
+              <option value="Pineapple">Pineapple</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Weight (kg)</label>
+            <select name="weight" id="weight" required>
+              <option value="0.5">0.5 kg (₹500)</option>
+              <option value="1">1 kg (₹900)</option>
+              <option value="2">2 kg (₹1700)</option>
+              <option value="3">3 kg (₹2500)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label>Message on Cake</label>
+            <input type="text" name="message" placeholder="e.g. Happy Birthday Rahul" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Special Instructions</label>
+            <textarea name="instructions" placeholder="Any specific design or dietary requirements?"></textarea>
+          </div>
+          
+          <div class="mt-4">
+            <p class="text-lg">Estimated Price: <strong id="estPrice">₹500</strong></p>
+            <button type="submit" class="btn primary mt-2">Add to Cart</button>
+          </div>
+        </form>
+      </div>
+      
+      <div>
+        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=800&q=80" alt="Custom Cake" style="border-radius: 12px; width: 100%; height: 100%; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/customer.js"></script>
+  <script>
+    const weightSelect = document.getElementById("weight");
+    const estPrice = document.getElementById("estPrice");
+    
+    weightSelect.addEventListener("change", () => {
+      const text = weightSelect.options[weightSelect.selectedIndex].text;
+      const price = text.match(/₹(\d+)/)[1];
+      estPrice.textContent = `₹${price}`;
+    });
+
+    document.getElementById("customCakeForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const weightText = weightSelect.options[weightSelect.selectedIndex].text;
+      const price = Number(weightText.match(/₹(\d+)/)[1]);
+      
+      addCustomCake({
+        flavor: fd.get("flavor"),
+        weight: fd.get("weight"),
+        message: fd.get("message"),
+        price: price
+      });
+    });
+  </script>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">🎂 Gyan Bakery</div>
+        <p>Baking memories since 2010. 100% artisanal, eggless options available.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Twitter">x</a>
+          <a href="#" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">📦 Track Order</a></p>
+        <p><a href="profile.html">👤 My Account</a></p>
+        <p><a href="products.html">🛍️ Shop Now</a></p>
+      </div>
+      <div>
+        <h3>Contact & Hours</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@gyanbakery.com</p>
+        <p style="margin-top: 1rem; color: #fff; font-size: 0.9rem; opacity: 0.8;">Mon-Sun: 9AM - 9PM</p>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Refund Policy</a>
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Gyan Bakery. All rights reserved. ❤️</p>
+    </div>
+  </footer>

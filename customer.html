@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Portal • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html"><span>Gyan Bakery</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="custom-cake.html">Custom Cake</a>
+        <a href="cart.html" class="btn outline">Cart <span id="cartBadge" class="badge" style="display:none;"></span></a>
+        <a href="profile.html" class="btn primary">My Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mt-4">
+    <div class="flex justify-between items-center">
+      <h1>Customer Portal</h1>
+      <p class="text-muted">Welcome back to Gyan Bakery</p>
+    </div>
+
+    <section class="mt-4">
+      <div class="grid-3">
+        <div class="dash-card">
+          <h3>Quick Links</h3>
+          <div class="grid-2 mt-2" style="gap:1rem;">
+            <a href="profile.html" class="btn outline text-center">Manage Orders</a>
+            <a href="products.html" class="btn outline text-center">Browse Menu</a>
+            <a href="custom-cake.html" class="btn outline text-center">Order Custom Cake</a>
+            <a href="track-order.html" class="btn outline text-center">Track Delivery</a>
+          </div>
+        </div>
+        <div class="dash-card flex-center">
+          <p class="text-muted">Wallet Balance</p>
+          <h1 id="dashWalletBalance" style="font-size:3rem; margin:0.5rem 0;">₹0</h1>
+          <a href="profile.html" class="btn primary sm">Add Money</a>
+        </div>
+        <div class="stat-card" style="background:var(--primary); color:white; border:none;">
+          <div id="offerSection">
+            <h3>Today's Offer</h3>
+            <p>Get 10% off on all Chocolate Cakes! Use code: <strong>CHOCO10</strong></p>
+            <a href="products.html" class="btn" style="background:white; color:var(--primary); margin-top:1rem;">Shop Now</a>
+          </div>
+          <div id="adminLinkSection" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.2);">
+            <p><strong>Admin Access:</strong></p>
+            <a href="admin.html" class="btn outline" style="background:white; color:var(--primary); width:100%; margin-top:0.5rem;">Enter Admin Panel</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="mt-4">Recommended for You</h2>
+    <div id="featuredGrid" class="grid-4 mt-4">
+      <!-- Populated by JS -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">🎂 Gyan Bakery</div>
+        <p>Baking memories since 2010. 100% artisanal, eggless options available.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Twitter">x</a>
+          <a href="#" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">📦 Track Order</a></p>
+        <p><a href="profile.html">👤 My Account</a></p>
+        <p><a href="products.html">🛍️ Shop Now</a></p>
+      </div>
+      <div>
+        <h3>Contact & Hours</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@gyanbakery.com</p>
+        <p style="margin-top: 1rem; color: #fff; font-size: 0.9rem; opacity: 0.8;">Mon-Sun: 9AM - 9PM</p>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Refund Policy</a>
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Gyan Bakery. All rights reserved. ❤️</p>
+    </div>
+  </footer>
+
+  <script src="assets/customer.js"></script>
+</body>
+</html>

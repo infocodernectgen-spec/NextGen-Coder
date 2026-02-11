@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Track Order • Gyan Bakery</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    .track-steps { display: flex; justify-content: space-between; position: relative; margin: 3rem 0; }
+    .track-steps::before { content: ''; position: absolute; top: 15px; left: 0; right: 0; height: 4px; background: #e5e7eb; z-index: 0; }
+    .step { position: relative; z-index: 1; text-align: center; width: 20%; }
+    .step-icon { width: 34px; height: 34px; background: #e5e7eb; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; font-weight: bold; transition: 0.3s; }
+    .step.active .step-icon { background: var(--primary); }
+    .step.completed .step-icon { background: var(--success); }
+    .step p { font-size: 0.85rem; color: var(--muted); }
+    .step.active p { color: var(--text); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-wrap">
+      <a class="logo" href="index.html"><span>Gyan Bakery</span></a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="profile.html">My Account</a>
+        <a href="cart.html" class="btn outline sm">Cart <span id="cartBadge" class="badge" style="display:none;"></span></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="container mt-4">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h1 class="text-center">Track Order</h1>
+      <div id="orderInfo" class="text-center mt-4 mb-4">
+        <!-- JS -->
+      </div>
+      
+      <div class="track-steps">
+        <div class="step" id="step-Received">
+          <div class="step-icon">1</div>
+          <p>Received</p>
+        </div>
+        <div class="step" id="step-Baking">
+          <div class="step-icon">2</div>
+          <p>Baking</p>
+        </div>
+        <div class="step" id="step-Ready">
+          <div class="step-icon">3</div>
+          <p>Ready</p>
+        </div>
+        <div class="step" id="step-Out">
+          <div class="step-icon">4</div>
+          <p>Out for Delivery</p>
+        </div>
+        <div class="step" id="step-Delivered">
+          <div class="step-icon">5</div>
+          <p>Delivered</p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="profile.html" class="btn outline">Back to Orders</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('id');
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const order = orders.find(o => o.id === orderId);
+    
+    if (!order) {
+      document.getElementById("orderInfo").innerHTML = "<p>Order not found.</p>";
+    } else {
+      document.getElementById("orderInfo").innerHTML = `
+        <h3>Order #${order.id}</h3>
+        <p>Total: ${order.total}</p>
+      `;
+      
+      const statuses = ["Received", "Baking", "Ready", "Out for delivery", "Delivered"];
+      const currentIdx = statuses.indexOf(order.status);
+      
+      // Handle mapping "Out for delivery" to ID "step-Out"
+      const stepIds = ["step-Received", "step-Baking", "step-Ready", "step-Out", "step-Delivered"];
+      
+      stepIds.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (idx < currentIdx) el.classList.add("completed");
+        if (idx === currentIdx) el.classList.add("active");
+      });
+    }
+  </script>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">🎂 Gyan Bakery</div>
+        <p>Baking memories since 2010. 100% artisanal, eggless options available.</p>
+        <div class="social-links">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">ig</a>
+          <a href="#" title="Twitter">x</a>
+          <a href="#" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="track-order.html">📦 Track Order</a></p>
+        <p><a href="profile.html">👤 My Account</a></p>
+        <p><a href="products.html">🛍️ Shop Now</a></p>
+      </div>
+      <div>
+        <h3>Contact & Hours</h3>
+        <p>📍 123 Baker Street, Food City</p>
+        <p>📞 +91 98765 43210</p>
+        <p>✉️ hello@gyanbakery.com</p>
+        <p style="margin-top: 1rem; color: #fff; font-size: 0.9rem; opacity: 0.8;">Mon-Sun: 9AM - 9PM</p>
+      </div>
+    </div>
+    
+    <div class="container footer-bottom">
+      <p>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Refund Policy</a>
+      </p>
+      <p style="margin-top: 1rem; opacity: 0.6;">© 2026 Gyan Bakery. All rights reserved. ❤️</p>
+    </div>
+  </footer>
+</body>
+</html>
